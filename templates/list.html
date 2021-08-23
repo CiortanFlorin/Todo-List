@@ -1,0 +1,17 @@
+{% extends 'bootstrap/base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+{% include "header.html" %}
+
+<h1>TodoList</h1>
+{{ wtf.quick_form(form, novalidate=True, button_map={"submit": "primary"}) }}
+{% for item in items %}
+    {% if item.done==False %}
+    <p>{{item.item}} <a href="{{url_for('make_done', item_id=item.id) }}">Mark_done</a></p>
+    {% else %}
+    <del>{{item.item}}</del>
+    <br>
+    {% endif %}
+{% endfor %}
+{% endblock %}
